@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="appMelomance" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="appMelomance" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="appMelomance" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="appMelomance" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+
+  <title ng-bind="'TITLE' | translate">Melomance</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+
+  <!-- Styles -->
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/src/loading-bar.css" type="text/css" media="screen"/>
+  <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css" type="text/css" media="screen"/>
+  <link rel="stylesheet" href="bower_components/angular-growl-v2/build/angular-growl.min.css" type="text/css" media="screen"/>
+  <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css">
+  <link rel="stylesheet" href="css/all_styles.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Neucha|PT+Serif&subset=latin,cyrillic,cyrillic-ext' rel='stylesheet' type='text/css'>
+
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script>(function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-60442400-2', 'auto');
+  ga('send', 'pageview');</script>
+
+</head>
+<body>
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="document-wrapper">
+  <div class="container main-wrapper pl20 pr20">
+
+    <div ng-include="'partials/intro.html'" class="parent unit" ng-show='introShow == true' ng-controller="introController"></div>
+    <div ng-include="'partials/logo.html'" class="logo unit" ng-show="intro == false"></div>
+    <div ng-include="'partials/menu.html'" class="unit" ng-show="intro == false"></div>
+    <div ui-view ng-show="!artistNotFound && intro == false" class="view-area pt15"></div>
+    <div ng-if="artistNotFound && intro == false" class="validation" ng-bind="'ARTIST_NOT_FOUND' | translate"></div>
+
+  </div>
+</div>
+
+<div class="footer navbar-fixed-bottom">
+  <div class="container">
+    <p class="muted">
+      &#169 2015 PavelCreator - <a href="http://pavelcreator.com" target='_blank'>Portfolio</a>, <a href="https://github.com/PavelCreator" target='_blank' rel='nofollow'>GitHub</a>
+    </p>
+  </div>
+</div>
+</div>
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+
+<!-- Sources -->
+<script src="bower_components/jQuery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/js/dropdown.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+<script src="bower_components/angular-growl-v2/build/angular-growl.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/custom-bootstrap/bootstrap.min.js"></script>
+<script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+
+<!-- Libraries -->
+<script src="js/libs/pavelcreatorLib.js"></script>
+<script src="js/libs/xml2json.js"></script>
+
+<!-- UI -->
+<script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
+
+<!-- Directives -->
+<script src="js/ui/imagePreloaderDrct.js"></script>
+<script src="js/ui/inputsDrct.js"></script>
+
+<!-- App -->
+<script src="js/appTranslations.js"></script>
+<script src="js/appSources.js"></script>
+<script src="js/appConfig.js"></script>
+<script src="js/appRouter.js"></script>
+<script src="js/appDrct.js"></script>
+<script src="js/appFilters.js"></script>
+
+<!-- Services -->
+<script src="js/services/dataSvc.js"></script>
+<script src="js/services/lastFmSvc.js"></script>
+<script src="js/services/redirectSvc.js"></script>
+<script src="js/services/cookieSvc.js"></script>
+<script src="js/services/storageSvc.js"></script>
+<script src="js/appSvc.js"></script>
+
+<!-- Controllers -->
+<script src="js/controllers/introCtrl.js"></script>
+<script src="js/controllers/menuCtrl.js"></script>
+<script src="js/controllers/bestSongsCtrl.js"></script>
+<script src="js/controllers/bestAlbumsCtrl.js"></script>
+<script src="js/controllers/similarArtistsCtrl.js"></script>
+<script src="js/controllers/similarArtistsByGenresCtrl.js"></script>
+<script src="js/controllers/artistInfoCtrl.js"></script>
+<script src="js/controllers/genreTopArtistsCtrl.js"></script>
+<script src="js/controllers/topGenresCtrl.js"></script>
+<script src="js/controllers/topArtistsCtrl.js"></script>
+<script src="js/controllers/topTracksCtrl.js"></script>
+<script src="js/controllers/libGenresCtrl.js"></script>
+<script src="js/controllers/libArtistsCtrl.js"></script>
+<script src="js/appCtrl.js"></script>
+
+<script src="app.js"></script>
+
+<script src="components/version/version.js"></script>
+<script src="components/version/version-directive.js"></script>
+<script src="components/version/interpolate-filter.js"></script>
+</body>
+</html>

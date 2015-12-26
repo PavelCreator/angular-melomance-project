@@ -1,0 +1,75 @@
+<div>
+  <h2><span class="bootstrap-blue">{{artist}}</span> - {{ 'BEST_ALBUMS' | translate }}</h2>
+  <h4 class="mt-5 mb20">{{ 'ACCORDING_TO' | translate }} <a href="http://www.last.fm/" rel="nofollow" target='_blank'>Last.fm</a></h4>
+
+  <table class="table table-big-font mb0" id="best-albums-table-head">
+    <thead>
+    <tr>
+      <th class="w10p">{{ 'PLACE' | translate }}</th>
+      <th class="w10p">{{ 'COVER' | translate }}</th>
+      <th class="w65p"><a href="" ng-click="reverse=!reverse;order('name', reverse)">{{ 'ALBUM_NAME' | translate }}</a></th>
+      <th class="w15p"><a href="" ng-click="reverse=!reverse;order('playcount', reverse)">{{ 'PLAY_COUNT' | translate }}</a></th>
+    </tr>
+    </thead>
+  </table>
+  <div ng-show="contentIsReady" class="unit">
+    <table class="table table-striped-tbody table-big-font table-mt0" id="best-albums-table-content">
+      <tbody ng-repeat="album in albums | limitTo:limit">
+      <tr class="album_{{$index}}">
+        <td class="w10p">{{$index + 1}}</td>
+        <td class="w10p">
+          <div>
+            <img preloader src="{{album.image['1']['__text']}}" alt="{{album.name}}"/>
+            <span class="loading"><img src="images/preloader64.gif"/></span>
+            <span class="srcFail"><img src="images/no_img64.gif"/></span>
+          </div>
+        </td>
+        <td class="w65p"><a href="" ng-click="getAlbumInfo(album.name,$index)">{{album.name}}</a></td>
+        <td class="w15p">{{album.playcount | number}}</td>
+      </tr>
+      <tr ng-show="albumDetailShow == album.name" class="unit">
+        <td colspan="4" class="album-details-wrapper">
+          <img preloader src="{{album.image['3']['__text']}}" alt="" class="artist-big-image-lastfm mt28 album-cover"/>
+          <span class="loading artist-big-image-lastfm mt28"><img src="images/preloader315.gif"/></span>
+          <span class="srcFail artist-big-image-lastfm mt28"><img src="images/no_img315.gif"/></span>
+          <h2><span>{{albumDetails.artist}} - {{albumDetails.name}}</span></h2>
+          <p><label>{{ 'PLAYCOUNT' | translate }}:</label> {{albumDetails.playcount | number}}</p>
+          <p><label>{{ 'LISTENERS' | translate }}:</label> {{albumDetails.listeners | number}}</p>
+          <p><label>{{ 'AUDIO' | translate }}:</label>
+            <a href="{{ media.yandex(albumDetails.artist,albumDetails.name) }}" target='_blank' rel='nofollow'><img class="grayscale media_in_menu ml2" src="{{ media.yandex_img}}" alt=""></a>
+          </p>
+          <p>
+          <form class="inline-block genre-repeater" ng-show="albumDetails.tags.tag[0]">
+            <label>{{ 'GENRES' | translate }}: </label>
+            <a href="" ui-sref="genreTopArtists({genre: tag.name, limit: limit})" ng-repeat="tag in albumDetails.tags.tag">
+              <button name="{{ tag.name }}" type="button" class="btn btn-primary ml3">{{ tag.name }}</button>
+            </a>
+          </form>
+          </p>
+          <h3 ng-show="albumDetails.wiki">{{ 'ALBUM_INFO' | translate }}:</h3>
+          <p ng-show="albumDetails.wiki" class="fz14 pre-line" ng-bind-html="albumDetails.wiki"></p>
+          <table ng-show="albumDetails.tracks.track[0]" class="table table-striped">
+            <caption class="h3"><span>{{ 'TRACKS' | translate }}:</span></caption>
+            <tr>
+              <th class="w15p">{{ 'PLACE' | translate }}</th>
+              <th class="w60p">{{ 'TRACK_NAME' | translate }}</th>
+              <th class="w25p">{{ 'DURATION' | translate }}</th>
+            </tr>
+            <tr ng-repeat="track in albumDetails.tracks.track">
+              <td class="w15p">{{$index + 1}}</td>
+              <td class="w60p">{{track.name}}</td>
+              <td class="w25p">{{track.duration | secondsToDateTime | date:'mm:ss'}}</td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+      <tr ng-show="albumNotFoundShow == album.name">
+        <td colspan="4">
+          <h3 class="album-not-found">{{ 'ALBUM_IS_NOT_FOUND' | translate }}</h3>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div>
+  <h2>{{ 'ARTISTS_LIST' | translate }}</h2>
+  <h4 class="mt-5 mb20">{{ 'ACCORDING_TO' | translate }} PavelCreator</h4>
+
+  <div ng-show="contentIsReady" class="unit fixed_height_td">
+    <table class="table table-striped table-big-font table-mt0">
+      <tbody>
+      <tr ng-repeat="artist in artists">
+        <td class="w20p">
+           <td class="">{{$index + 1}}</td>
+           <td class=""><a href="" ng-click="artistTopArtists(artist.name,limit)">{{artist.name}}</a></td>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

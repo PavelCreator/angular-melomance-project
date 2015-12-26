@@ -1,0 +1,68 @@
+<div>
+  <h2><span>{{ 'TOP_ARTISTS' | translate }}</span></h2>
+  <h4 class="mt-5 mb20">{{ 'ACCORDING_TO' | translate }} <a href="http://www.last.fm/" rel="nofollow" target='_blank'>Last.fm</a>
+  </h4>
+  <table class="table table-big-font mb0">
+    <thead>
+    <tr>
+      <th class="w5p fz16"><i class="fa fa-sort-numeric-asc"></i></th>
+      <th class="w10p fz16">{{ 'IMAGE' | translate }}</th>
+      <th class="w20p fz16"><a href="" ng-click="reverse=!reverse;order('name', reverse)">{{ 'ARTIST_NAME' | translate }}</a></th>
+      <th class="w10p fz16"><a href="" ng-click="reverse=!reverse;order('listeners', reverse)">{{ 'LISTENERS' | translate }}</a></th>
+      <th class="w15p fz16"><a href="" ng-click="reverse=!reverse;order('playcount', reverse)">{{ 'PLAYCOUNT' | translate }}</a></th>
+      <th class="w20p fz16">{{ 'MEDIA' | translate }}</th>
+      <th class="w20p fz16">{{ 'GO_TO_SUBSECTION' | translate }}</th>
+    </tr>
+    </thead>
+  </table>
+  <div ng-show="contentIsReady" class="unit fixed_height_td">
+    <table class="table table-striped table-big-font table-mt0">
+      <tbody>
+      <tr ng-repeat="artist in artists" ng-show="contentIsReady" class="unit">
+        <td class="w5p">{{$index + 1}}</td>
+        <td class="w10p">
+          <div>
+            <img preloader src="{{artist.image['1']['__text']}}" alt="{{artist.name}}"/>
+            <span class="loading"><img src="images/preloader64.gif"/></span>
+            <span class="srcFail"><img src="images/no_img64.gif"/></span>
+          </div>
+        </td>
+        <td class="w20p">
+          <a href="" ui-sref="bestSongs({artist: artist.name, limit: limit})" ng-click="bestSongsForArtist(artist.name)">{{artist.name}}</a>
+        </td>
+        <td class="w10p">{{ artist.listeners | number }}</td>
+        <td class="w15p">{{ artist.playcount | number }}</td>
+        <td class="w20p">
+          <a href="{{ media.vk(artist.name) }}" target='_blank' rel='nofollow'><img class="grayscale media_in_list" src="{{ mediaImg.vk_img }}" alt=""></a>
+          <a class="ml6" href="{{ media.yandex(artist.name) }}" target='_blank' rel='nofollow'><img class="grayscale media_in_list" src="{{ mediaImg.yandex_img }}" alt=""></a>
+          <a class="ml6" href="{{ media.youtube(artist.name) }}" target='_blank' rel='nofollow'><img class="grayscale media_in_list" src="/images/youtube.png" alt=""></a>
+        </td>
+        <td class="w20p">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              {{ 'QUICK_NAVIGATION' | translate }}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="" ui-sref="bestSongs({artist: artist.name, limit: limit})">{{ 'BEST_SONGS' | translate
+                }}</a></li>
+              <li><a href="" ui-sref="bestAlbums({artist: artist.name, limit: limit})">{{ 'BEST_ALBUMS' | translate
+                }}</a></li>
+              <li><a href="" ui-sref="similarArtists({artist: artist.name, limit: limit})">{{ 'SIMILAR_ARTISTS' |
+                translate }}</a></li>
+              <li><a href="" ui-sref="similarArtistsByGenres({artist: artist.name, limit: limit})">{{ 'SIMILAR_GENRES'
+                | translate }}</a></li>
+              <li><a href="" ui-sref="artistInfoLastFm({artist: artist.name})">{{ 'BIOGRAPHY' | translate }}
+                (LastFM)</a></li>
+              <li><a href="{{media.wiki(artist.name)}}" target='_blank' rel='nofollow'>{{ 'BIOGRAPHY' | translate }}
+                (Wikipedia)</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

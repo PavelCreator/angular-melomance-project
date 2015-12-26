@@ -1,0 +1,20 @@
+<div class="artist-info-page">
+  <h2 class="artist-info-header-lastfm"><span class="bootstrap-blue">{{artist.name}}</span> - <span class="pp">{{ 'BIOGRAPHY' | translate
+    }}</span></h2>
+  <h4 class="mt-5 mb-5">{{ 'ACCORDING_TO' | translate }} <a href="http://www.last.fm/" rel="nofollow" target='_blank'>Last.fm</a></h4>
+  <form class="inline-block">
+    <div ng-show="genresIsReady" class="unit">
+      <label>{{ 'GENRES' | translate }}: </label>
+      <button ng-repeat="tag in artist.tags" type="button"
+              ui-sref="genreTopArtists({genre: tag.name, limit: limit})"
+              class="btn btn-primary ml3">{{ tag.name }}
+      </button>
+    </div>
+  </form>
+  <img preloader src="{{artist.image}}" alt="" class="artist-big-image-lastfm mt45"/>
+  <span class="loading artist-big-image-lastfm mt45"><img src="images/preloader315.gif"/></span>
+  <span class="srcFail artist-big-image-lastfm mt45"><img src="images/no_img315.gif"/></span>
+  <div ng-show="contentIsReady" class="unit">
+    <div class="artist-info-lastfm pre-line" ng-bind-html="artist.info"></div>
+  </div>
+</div>

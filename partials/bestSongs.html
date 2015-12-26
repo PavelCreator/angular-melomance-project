@@ -1,0 +1,30 @@
+<div>
+  <h2><span class="bootstrap-blue">{{artist}}</span> - {{ 'TOP_TRACKS' | translate }}</h2><div growl></div>
+  <h4 class="mt-5 mb20">{{ 'ACCORDING_TO' | translate }} <a href="http://www.last.fm/" rel="nofollow" target='_blank'>Last.fm</a></h4>
+  <table class="table table-striped-tbody table-big-font" id="best-songs-table">
+    <thead>
+    <tr>
+      <th class="w10p" style="width:7%">{{ 'PLACE' | translate }}</th>
+      <th class="w30p" style="width:33%">{{ 'TRACK_NAME' | translate }}</th>
+      <th class="w20p">{{ 'PLAY_COUNT' | translate }}</th>
+      <th class="w15p">{{ 'LISTENERS' | translate }}</th>
+      <th class="w10p tac">{{ 'AUDIO' | translate }}</th>
+      <th class="w10p tac">{{ 'VIDEO' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="track in tracks | limitTo:limit">
+    <tr ng-show="contentIsReady" class="unit">
+      <td class="w10p" style="width:7%">{{$index + 1}}</td>
+      <td class="w30p" style="width:33%"><a href="{{ media.vk(artist,track.name) }}" target='_blank' rel='nofollow'>{{track.name}}</a> <i ng-click="copyToClipboard(track.name)" class="fa fa-copy copy-icon"></i>
+      </td>
+      <td class="w20p">{{track.playcount | number}}</td>
+      <td class="w15p">{{track.listeners | number}}</td>
+      <td class="w10p tac">
+        <a href="{{ media.vk(artist,track.name) }}" target='_blank' rel='nofollow'><img class="grayscale media_in_list" src="{{ mediaImg.vk_img }}" alt=""></a>
+        <a class="ml6" href="{{ media.yandex(artist,track.name) }}" target='_blank' rel='nofollow'><img class="grayscale media_in_list" src="{{ mediaImg.yandex_img }}" alt=""></a>
+      </td>
+      <td class="w10p tac"><a href="{{ media.youtube(artist,track.name) }}" target='_blank' rel='nofollow'><img class="grayscale media_in_list" src="/images/youtube.png" alt=""></a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "Melomance",
+  "description": "the best service for the music lovers",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular-rangeslider": "",
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "angular-bootstrap": "",
+    "angular-animate": "",
+    "html5-boilerplate": "~5.2.0",
+    "bootstrap-sass": "~3.3.5",
+    "angular-ui-router": "~0.2.15",
+    "jQuery": "2.1.4",
+    "angular-loading-bar": "~0.8.0",
+    "angular-gettext": "",
+    "angular-cookies": "",
+    "bootstrap": "3.3.6",
+    "components-font-awesome": "",
+    "angular-growl-v2": "",
+    "animatewithsass": ""
+  },
+  "resolutions": {
+    "angular": "~1.4.0"
+  }
+}

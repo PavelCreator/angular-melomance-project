@@ -1,0 +1,418 @@
+<div class="top-menu-wrapper" ng-controller="menuController">
+
+  <!-- Artist Menu -->
+  <div ng-show="mode == 'artist'" class="top-menu">
+    <div class="line1 form-inline">
+
+      <!-----------------------------ARTIST INPUT--------------------------------------->
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-set">{{ 'ENTER_AN_ARTIST' | translate }}:</legend>
+        <input type='text'
+               id="artist-input"
+               ng-model="artist"
+               ng-disabled="unBlockInputs == false"
+               enter-event="renewPicture()"
+               class="form-control input-lg bold"
+               name="artist"
+               placeholder="{{ 'PHOLDER_ARTIST' | translate }}"
+            >
+        <button type="button"
+                id="artist-input-button"
+                ng-disabled="unBlockInputs == false"
+                ng-click="renewPicture()"
+                class="btn btn-cool btn-lg btn-lg-image">
+          <img src="/images/set.png" alt="" class="img-enter">
+        </button>
+      </fieldset>
+
+      <!--------------------------------MODE------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'MODE' | translate }}</legend>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button"
+                  id="mode-artists"
+                  ui-sref="bestSongs({artist: artist, limit: limit})"
+                  ng-class="mode == 'artist' ? 'active' : ''"
+                  class="btn btn-cool btn-lg">{{ 'ARTIST' | translate }}
+          </button>
+          <button type="button"
+                  id="mode-genre"
+                  ui-sref="genreTopArtists({genre: genre, limit: limit})"
+                  ng-class="mode == 'genre' ? 'active' : ''"
+                  class="btn btn-cool btn-lg">{{ 'GENRE' | translate }}
+          </button>
+        </div>
+      </fieldset>
+
+      <!--------------------------------LIMIT------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'LIMIT' | translate }}</legend>
+        <input type='text'
+               int-num-input
+               maxlength="2"
+               id="limit-field"
+               ng-disabled="unBlockLimit == false"
+               ng-model="limit"
+               enter-event="renewPicture()"
+               class="form-control w55i input-lg"
+               name="limit">
+        <button
+            type="button"
+            id="limit-button"
+            ng-disabled="unBlockLimit == false"
+            ng-click="renewPicture()"
+            class="btn btn-cool btn-lg btn-lg-image">
+          <img src="/images/set.png" alt="" class="img-enter">
+        </button>
+      </fieldset>
+
+      <!--------------------------------MEDIA------------------------------------>
+      <fieldset class="fieldset media_in_menu_wrapper" id="media-in-menu">
+        <legend class="fieldset-legend">{{ 'MEDIA' | translate }}</legend>
+        <a id="media-vk" href="{{media.vk}}" target='_blank' rel='nofollow'><img class="grayscale media_in_menu" src="{{ media.vk_img}}" alt=""></a>
+        <a id="media-yandex-music" href="{{media.yandex}}" target='_blank' rel='nofollow'><img class="grayscale media_in_menu" src="{{ media.yandex_img}}" alt=""></a>
+        <a id="media-youtube" href="{{media.youtube}}" target='_blank' rel='nofollow'><img class="grayscale media_in_menu" src="/images/youtube.png" alt=""></a>
+      </fieldset>
+
+    </div>
+    <div class="line2 form-inline">
+      <!-------------------------------------------------------------------->
+      <!------------------------------ARTISTS------------------------------->
+      <!-------------------------------------------------------------------->
+
+      <!-----------------------------BEST (ARTISTS)--------------------------------------->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">{{ 'BEST' | translate }}</legend>
+
+        <a href="" ui-sref="bestSongs({artist: artist, limit: limit})">
+          <button type="button"
+                  id="best-songs-button"
+                  ui-sref="bestSongs({artist: artist, limit: limit})"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'SONGS' | translate }}
+          </button>
+        </a>
+        <a href="" ui-sref="bestAlbums({artist: artist, limit: limit})">
+          <button type="button"
+                  id="best-albums-button"
+                  ui-sref="bestAlbums({artist: artist, limit: limit})"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'ALBUMS' | translate }}
+          </button>
+        </a>
+      </fieldset>
+
+      <!-------------------------------SIMILAR------------------------------------->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">{{ 'SIMILAR' | translate }}</legend>
+        <a href="" ui-sref="similarArtists({artist: artist, limit: limit})">
+          <button type="button"
+                  id="similar-artists"
+                  ui-sref="similarArtists({artist: artist, limit: limit})"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'ARTISTS' | translate }}
+          </button>
+        </a>
+        <a href="" ui-sref="similarArtistsByGenres({artist: artist, limit: limit})">
+          <button type="button"
+                  id="similar-artists-by-genre"
+                  ui-sref="similarArtistsByGenres({artist: artist, limit: limit})"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'GENRES' | translate }}
+          </button>
+        </a>
+      </fieldset>
+
+      <!--------------------------------INFO------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">{{ 'ARTIST_INFO' | translate }}</legend>
+        <a href="" ui-sref="artistInfoLastFm({artist: artist})">
+          <button type="button"
+                  id="biorgaphy-last-fm"
+                  ui-sref="artistInfoLastFm({artist: artist})"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'BIOGRAPHY' | translate }} (LastFM)
+          </button>
+        </a>
+        <a id="biorgaphy-wiki"
+           href="{{media.wiki}}" target='_blank' rel='nofollow'>
+          <img class="media_in_menu_wiki" src="/images/wiki.png" alt="">
+        </a>
+      </fieldset>
+
+      <!-----------------------------CONTENT (ARTISTS)--------------------------------------->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">{{ 'ARTISTS' | translate }}</legend>
+
+        <a ui-sref="topArtists">
+          <button type="button"
+                  id="top-artists-button"
+                  ui-sref="topArtists"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'LASTFM_TOP' | translate }}
+          </button>
+        </a>
+        <a ui-sref="libArtists">
+          <button type="button"
+                  id="lib-artists-button"
+                  ui-sref="libArtists"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'LIBRARY' | translate }}
+          </button>
+        </a>
+      </fieldset>
+    </div>
+    <div class="line3 form-inline">
+
+      <!--------------------------------LANG------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-switch">{{ 'LANG' | translate }}</legend>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button"
+                  id="ru-lang"
+                  ng-click="changeLanguage('ru')"
+                  ng-class="lang == 'ru' ? 'active' : ''"
+                  class="btn btn-switch">Русский
+          </button>
+          <button type="button"
+                  id="en-lang"
+                  ng-click="changeLanguage('en')"
+                  ng-class="lang == 'en' ? 'active' : ''"
+                  class="btn btn-switch">English
+          </button>
+        </div>
+      </fieldset>
+
+      <!---------------------------------RANDOM----------------------------------->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'RANDOM' | translate }}
+        </legend>
+        <button type="button"
+                id="random-artist-button"
+                ng-click="randomArtist()"
+                class="btn btn-cool">{{ 'ARTIST' | translate }}
+        </button><button type="button"
+                id="random-genre-button"
+                ng-click="randomGenre()"
+                class="btn btn-cool">{{ 'GENRE' | translate }}
+        </button>
+        <span class="library_menu unit" ng-show="lib == 'lastfm'">{{ 'CHOSEN' | translate }}: "{{ 'LASTFM_TOP' | translate }}"</span>
+        <span class="library_menu unit" ng-show="lib == 'library'">{{ 'CHOSEN' | translate }}: "{{ 'LIBRARY' | translate }}"</span>
+
+      </fieldset>
+
+      <!--------------------------------CHOOSE LIBRARY------------------------------------>
+      <fieldset class="fieldset" id="switch-wrapper">
+        <legend class="fieldset-legend fieldset-legend-switch">{{ 'CONTENT' | translate }}</legend>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button"
+                  id="switch-lastfm"
+                  ng-click="switchLibrary('lastfm')"
+                  ng-class="lib == 'lastfm' ? 'active' : ''"
+                  class="btn btn-switch">{{ 'LASTFM_TOP' | translate }}
+          </button>
+          <button type="button"
+                  id="switch-library"
+                  ng-click="switchLibrary('library')"
+                  ng-class="lib == 'library' ? 'active' : ''"
+                  class="btn btn-switch">{{ 'LIBRARY' | translate }}
+          </button>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset unit" ng-show="howToUseOnPlay == false">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'ABOUT' | translate }}
+        </legend>
+        <button type="button"
+                id="how-to-use"
+                ng-click="howToUse();"
+                class="btn btn-cool"><i class="fa fa-info-circle"></i> {{ 'HOW_TO_USE' | translate }}
+        </button>
+      </fieldset>
+
+    </div>
+  </div>
+
+  <!-- Genre Menu -->
+  <div ng-show="mode == 'genre'" class="top-menu">
+    <div class="form-inline">
+
+      <!--------------------------------GENRE INPUT------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-set">{{ 'ENTER_A_GENRE' | translate }}:</legend>
+        <input type='text'
+               id="genre-input"
+               ng-disabled="unBlockInputs == false"
+               ng-model="genre"
+               enter-event="renewPicture()"
+               class="form-control input-lg bold"
+               name="genre"
+               placeholder="{{ 'PHOLDER_GENRE' | translate }}">
+        <button type="button"
+                id="genre-input-button"
+                ng-disabled="unBlockInputs == false"
+                ui-sref="genreTopArtists({genre: genre, limit: limit})"
+                ui-sref-active="active"
+                class="btn btn-cool btn-lg btn-lg-image">
+          <img src="/images/set.png" alt="" class="img-enter">
+        </button>
+      </fieldset>
+
+      <!--------------------------------MODE------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'MODE' | translate }}</legend>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button"
+                  id="artist-mode-button"
+                  ui-sref="bestSongs({artist: artist, limit: limit})"
+                  ng-class="mode == 'artist' ? 'active' : ''"
+                  class="btn btn-cool btn-lg">{{ 'ARTIST' | translate }}
+          </button>
+          <button type="button"
+                  id="genre-mode-button"
+                  ui-sref="genreTopArtists({genre: genre, limit: limit})"
+                  ng-class="mode == 'genre' ? 'active' : ''"
+                  class="btn btn-cool btn-lg">{{ 'GENRE' | translate }}
+          </button>
+        </div>
+      </fieldset>
+
+      <!--------------------------------LIMIT------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'LIMIT' | translate }}</legend>
+        <input type='text'
+               int-num-input
+               maxlength="2"
+               ng-disabled="unBlockLimit == false"
+               ng-model="limit"
+               enter-event="renewPicture()"
+               class="form-control w55i input-lg"
+               name="limit">
+        <button type="button"
+                ng-disabled="unBlockLimit == false"
+                ng-click="menu.setLimit()"
+                class="btn btn-cool btn-lg btn-lg-image">
+          <img src="/images/set.png" alt="" class="img-enter">
+        </button>
+      </fieldset>
+
+    </div>
+    <div class="form-inline">
+
+      <!-------------------------------------------------------------------->
+      <!------------------------------GENRES-------------------------------->
+      <!-------------------------------------------------------------------->
+
+      <!-----------------------------BEST (GENRES)--------------------------------------->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">{{ 'ARTISTS' | translate }}</legend>
+
+        <a href="" ui-sref="genreTopArtists({genre: genre, limit: limit})">
+          <button type="button"
+                  ui-sref="genreTopArtists({genre: genre, limit: limit})"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'BEST_IN_THIS_GENRE' | translate }}
+          </button>
+        </a>
+      </fieldset>
+
+      <!-----------------------------CONTENT (GENRES)--------------------------------------->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">{{ 'GENRES' | translate }}</legend>
+
+        <a ui-sref="topGenres">
+          <button type="button"
+                  id="top-genres-button"
+                  ui-sref="topGenres"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'LASTFM_TOP' | translate }}
+          </button>
+        </a>
+        <a ui-sref="libGenres">
+          <button type="button"
+                  id="lib-genres-button"
+                  ui-sref="libGenres"
+                  ui-sref-active="active"
+                  class="btn btn-primary">{{ 'LIBRARY' | translate }}
+          </button>
+        </a>
+      </fieldset>
+
+    </div>
+    <div class="form-inline">
+
+      <!--------------------------------LANG------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-switch">{{ 'LANG' | translate }}</legend>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button"
+                  ng-click="changeLanguage('ru')"
+                  ng-class="lang == 'ru' ? 'active' : ''"
+                  class="btn btn-switch">Русский
+          </button>
+          <button type="button"
+                  ng-click="changeLanguage('en')"
+                  ng-class="lang == 'en' ? 'active' : ''"
+                  class="btn btn-switch">English
+          </button>
+        </div>
+      </fieldset>
+
+      <!---------------------------------RANDOM----------------------------------->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'RANDOM' | translate }}
+        </legend>
+        <button type="button"
+                ng-click="randomArtist()"
+                class="btn btn-cool">{{ 'ARTIST' | translate }}
+        </button>
+        <button type="button"
+                ng-click="randomGenre()"
+                class="btn btn-cool">{{ 'GENRE' | translate }}
+        </button>
+        <span class="library_menu unit" ng-show="lib == 'lastfm'">{{ 'CHOSEN' | translate }}: "{{ 'LASTFM_TOP' | translate }}"</span>
+        <span class="library_menu unit" ng-show="lib == 'library'">{{ 'CHOSEN' | translate }}: "{{ 'LIBRARY' | translate }}"</span>
+
+      </fieldset>
+
+      <!--------------------------------CHOOSE LIBRARY------------------------------------>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend fieldset-legend-switch">{{ 'CONTENT' | translate }}</legend>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button"
+                  ng-click="switchLibrary('lastfm')"
+                  ng-class="lib == 'lastfm' ? 'active' : ''"
+                  class="btn btn-switch">{{ 'LASTFM_TOP' | translate }}
+          </button>
+          <button type="button"
+                  ng-click="switchLibrary('library')"
+                  ng-class="lib == 'library' ? 'active' : ''"
+                  class="btn btn-switch">{{ 'LIBRARY' | translate }}
+          </button>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset" ng-hide="howToUseOnPlay == false">
+        <legend class="fieldset-legend fieldset-legend-cool">{{ 'ABOUT' | translate }}
+        </legend>
+        <button type="button"
+                ng-click="howToUseOnPlay = false"
+                class="btn btn-cool"><i class="fa fa-hand-paper-o"></i> {{ 'STOP_HOW_TO_USE' | translate }}
+        </button>
+      </fieldset>
+
+    </div>
+  </div>
+  <div id="demo-blocker" class="blocker" ng-hide="howToUseOnPlay == false"></div>
+  <div class="demo-controller unit" ng-hide="howToUseOnPlay == false">
+    <button type="button"
+            id="stop-demo"
+            ng-click="howToUseOnPlay = false"
+            class="btn btn-default btn-lg demo-controller-width"><i class="fa fa-hand-paper-o"></i> {{ 'STOP_HOW_TO_USE' | translate }}
+    </button>
+    <div class="playback-speed demo-controller-width"><i class="fa fa-signal"></i> {{ 'SPEED' | translate }}: {{delay}}%</div>
+    <div id="demo-slider" class="demo-controller-width" range-slider min="50" max="150" pin-handle='min' model-max="delay"></div>
+  </div>
+
+</div>

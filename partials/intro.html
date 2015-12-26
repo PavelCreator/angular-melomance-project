@@ -1,0 +1,39 @@
+<div class="intro">
+  <p class="intro-welcome" ng-bind="'WELCOME' | translate">Добро пожаловать на</p>
+
+  <a href="" ng-click="toSite()">
+    <img src="/images/logo.png" alt="Melomance" class="intro_logo_melomance">
+  </a>
+  <p class="intro_choose_lang" ng-bind="'CHOOSE_LANG' | translate">Язык: </p>
+  <p>
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button"
+            id="ru-lang"
+            ng-click="changeLanguage('ru')"
+            ng-class="lang == 'ru' ? 'active' : ''"
+            class="btn btn-lang-intro btn-default">Русский
+    </button>
+    <button type="button"
+            ng-click="changeLanguage('en')"
+            ng-class="lang == 'en' ? 'active' : ''"
+            class="btn btn-lang-intro btn-default">English
+    </button>
+  </div>
+  </p>
+  <p>
+    <button type="button"
+            ng-click="startDemo()"
+            class="btn btn-demo-ru btn-primary"
+            ng-bind="'FIRST_TIME' | translate"
+            ng-class="lang == 'en' ? 'btn-demo-en' : ''">Я тут впервые
+    </button>
+  </p>
+  <p>
+    <button type="button"
+            ng-click="toSite()"
+            class="btn btn-demo-ru btn-switch"
+            ng-bind="'WAS_THERE' | translate"
+            ng-class="lang == 'en' ? 'btn-demo-en' : ''">Я уже бывал тут
+    </button>
+  </p>
+</div>

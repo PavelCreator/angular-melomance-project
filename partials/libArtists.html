@@ -1,0 +1,111 @@
+<div>
+  <h2><span>{{ 'ARTISTS_DEMO_LIBRARY' | translate }}</span></h2>
+  <h4 class="mt-5 mb20">{{ 'BY_SITE_CREATOR' | translate }}
+    <a href="http://pavelcreator.com/" rel="nofollow" target='_blank'>PavelCreator</a>
+  </h4>
+
+  <table class="table ">
+    <td class="w50p fixed_height_td table-no-padding">
+
+      <table class="table table-big-font mb0">
+        <thead>
+        <tr>
+          <th class="w10p fz16"><i class="fa fa-sort-numeric-asc"></i></th>
+          <th class="w60p fz16">{{ 'ARTIST_NAME' | translate }}</th>
+          <th class="w30p fz16">{{ 'GO_TO_SUBSECTION' | translate }}</th>
+        </tr>
+        </thead>
+      </table>
+      <div ng-show="contentIsReady" class="unit fixed_height_td">
+        <table class="table table-striped table-big-font2 table-mt0">
+          <tbody>
+          <tr ng-repeat="artist in artists | limitTo : 168 : 0" ng-show="contentIsReady" class="unit">
+            <td class="w10p">{{$index + 1}}</td>
+            <td class="w60p">
+              <a href="" ui-sref="bestSongs({artist: artist.name, limit: limit})" ng-click="bestSongsForArtist(artist.name)">{{artist.name}}</a>
+            </td>
+            <td class="w30p">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  {{ 'QUICK_NAVIGATION' | translate }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="" ui-sref="bestSongs({artist: artist.name, limit: limit})">{{ 'BEST_SONGS' | translate
+                    }}</a></li>
+                  <li><a href="" ui-sref="bestAlbums({artist: artist.name, limit: limit})">{{ 'BEST_ALBUMS' | translate
+                    }}</a></li>
+                  <li><a href="" ui-sref="similarArtists({artist: artist.name, limit: limit})">{{ 'SIMILAR_ARTISTS' |
+                    translate }}</a></li>
+                  <li><a href="" ui-sref="similarArtistsByGenres({artist: artist.name, limit: limit})">{{
+                    'SIMILAR_GENRES'
+                    | translate }}</a></li>
+                  <li><a href="" ui-sref="artistInfoLastFm({artist: artist.name})">{{ 'BIOGRAPHY' | translate }}
+                    (LastFM)</a></li>
+                  <li><a href="{{media.wiki(artist.name)}}" target='_blank' rel='nofollow'>{{ 'BIOGRAPHY' | translate }}
+                    (Wikipedia)</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{{ media.vk(artist.name) }}" target='_blank' rel='nofollow'>{{ 'LISTEN_VK' | translate }}</a></li>
+                  <li><a href="{{ media.yandex(artist.name) }}" target='_blank' rel='nofollow'>{{ 'LISTEN_YANDEX' | translate }}</a></li>
+                  <li><a href="{{ media.youtube(artist.name) }}" target='_blank' rel='nofollow'>{{ 'WATCH_YOUTUBE' | translate }}</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+    <td class="w50p fixed_height_td table-no-padding">
+      <table class="table table-big-font mb0">
+        <thead>
+        <tr>
+          <th class="w10p fz16"><i class="fa fa-sort-numeric-asc"></i></th>
+          <th class="w60p fz16">{{ 'ARTIST_NAME' | translate }}</th>
+          <th class="w30p fz16">{{ 'GO_TO_SUBSECTION' | translate }}</th>
+        </tr>
+        </thead>
+      </table>
+      <div ng-show="contentIsReady" class="unit fixed_height_td">
+        <table class="table table-striped table-big-font2 table-mt0">
+          <tbody>
+          <tr ng-repeat="artist in artists | limitTo : 168 : 168" ng-show="contentIsReady" class="unit">
+            <td class="w10p">{{$index + 169}}</td>
+            <td class="w60p">
+              <a href="" ui-sref="bestSongs({artist: artist.name, limit: limit})" ng-click="bestSongsForArtist(artist.name)">{{artist.name}}</a>
+            </td>
+            <td class="w30p">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  {{ 'QUICK_NAVIGATION' | translate }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="" ui-sref="bestSongs({artist: artist.name, limit: limit})">{{ 'BEST_SONGS' | translate
+                    }}</a></li>
+                  <li><a href="" ui-sref="bestAlbums({artist: artist.name, limit: limit})">{{ 'BEST_ALBUMS' | translate
+                    }}</a></li>
+                  <li><a href="" ui-sref="similarArtists({artist: artist.name, limit: limit})">{{ 'SIMILAR_ARTISTS' |
+                    translate }}</a></li>
+                  <li><a href="" ui-sref="similarArtistsByGenres({artist: artist.name, limit: limit})">{{
+                    'SIMILAR_GENRES'
+                    | translate }}</a></li>
+                  <li><a href="" ui-sref="artistInfoLastFm({artist: artist.name})">{{ 'BIOGRAPHY' | translate }}
+                    (LastFM)</a></li>
+                  <li><a href="{{media.wiki(artist.name)}}" target='_blank' rel='nofollow'>{{ 'BIOGRAPHY' | translate }}
+                    (Wikipedia)</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{{ media.vk(artist.name) }}" target='_blank' rel='nofollow'>{{ 'LISTEN_VK' | translate }}</a></li>
+                  <li><a href="{{ media.yandex(artist.name) }}" target='_blank' rel='nofollow'>{{ 'LISTEN_YANDEX' | translate }}</a></li>
+                  <li><a href="{{ media.youtube(artist.name) }}" target='_blank' rel='nofollow'>{{ 'WATCH_YOUTUBE' | translate }}</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+  </table>
+
+</div>

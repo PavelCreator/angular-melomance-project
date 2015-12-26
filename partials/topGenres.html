@@ -1,0 +1,30 @@
+<div>
+  <h2><span>{{ 'TOP_GENRES' | translate }}</span></h2>
+  <h4 class="mt-5 mb20">{{ 'ACCORDING_TO' | translate }} <a href="http://www.last.fm/" rel="nofollow" target='_blank'>Last.fm</a></h4>
+
+  <table class="table table-big-font mb0">
+    <thead>
+    <tr>
+      <th class="w20p">{{ 'PLACE' | translate }}</th>
+      <th class="w40p"><a href="" ng-click="reverse=!reverse;order('name', reverse)">{{ 'GENRE' | translate }}</a></th>
+      <th class="w20p"><a href="" ng-click="reverse=!reverse;order('reach', reverse)">{{ 'AUDIENCE' | translate }}</a></th>
+      <th class="w20p"><a href="" ng-click="reverse=!reverse;order('taggings', reverse)">{{ 'TAGGINGS' | translate }}</a></th>
+    </tr>
+    </thead>
+  </table>
+  <div ng-show="contentIsReady" class="unit fixed_height_td">
+    <table class="table table-striped table-big-font table-mt0">
+      <tbody>
+      <tr ng-repeat="genre in genres">
+        <td class="w20p">{{$index + 1}}</td>
+        <td class="w40p">
+          <a href="" ui-sref="genreTopArtists({genre: genre.name, limit: limit})" ng-click="genreTopArtists(genre.name,limit)">{{genre.name}}</a>
+        </td>
+        <td class="w20p">{{ genre.reach | number }}</td>
+        <td class="w20p">{{ genre.taggings | number }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
